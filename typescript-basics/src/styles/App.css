@@ -2,8 +2,24 @@
   text-align: center;
 }
 
-.site-layout-content {
+.app-content {
+  padding: 0 50px;
+  margin: 16px 0;
+}
+
+.mission-list-content {
   background: #fff;
   padding: 24px;
   min-height: 280px;
+}
+
+.nav-search {
+  width: 200px;
+  height: 31px;
+  margin: 16px 24px 16px 0;
+  float: left;
+}
+
+.navbar-title {
+  color: #FFF
 }

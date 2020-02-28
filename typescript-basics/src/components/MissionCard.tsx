@@ -1,28 +1,31 @@
-import * as React from 'react'
+import * as React from "react";
 // Ant Design
-import { Card } from 'antd';
+import { Card } from "antd";
 
 interface Props {
-    launch: any
+  launch: any;
 }
 
 const { Meta } = Card;
 
-const MissionCard: React.FunctionComponent<Props> = (props) => {
-    console.log(props.launch)
+const MissionCard: React.FunctionComponent<Props> = props => {
 
-    const launchImage = props.launch.links.mission_patch_small
-    const missionName = props.launch.mission_name
-    const missionLink = props.launch.links.article_link
+  const launchImage = props.launch.links.mission_patch_small;
+  const missionName = props.launch.mission_name;
+  const missionLink = props.launch.links.article_link;
 
-    return (
-        <Card
-            style={{width: '240px'}}
-            cover={<img src={launchImage} alt={missionName}/>}
-            >
-            <Meta title={missionName} description={<a href={missionLink} rel="noopener noreferrer" target="_blank">Mission Link</a>}></Meta>
-        </Card>
-    )
-}
+  return (
+    <Card cover={<img src={launchImage} alt={missionName} />}>
+      <Meta
+        title={missionName}
+        description={
+          <a href={missionLink} rel="noopener noreferrer" target="_blank">
+            Mission Link
+          </a>
+        }
+      ></Meta>
+    </Card>
+  );
+};
 
-export default MissionCard
+export default MissionCard;

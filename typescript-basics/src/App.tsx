@@ -1,17 +1,20 @@
 import * as React from "react";
 // Axios
 import axios from "axios";
-// Components
-import MissionCard from "./components/MissionCard";
 // Ant Design
-import { Layout, List } from "antd";
+import { Layout } from "antd";
+import MissionList from "./components/MissionList";
+import NavBar from "./components/NavBar";
 
-const { Header, Content } = Layout;
+const { Content } = Layout;
 
 interface Props {}
 
 const App: React.FunctionComponent<Props> = props => {
   const [apiData, setAPIData] = React.useState([]);
+  // Temporary state for search functionality
+  // Need to move this into some form of state management
+  const [searchText, setSearchText] = React.useState("");
 
   React.useEffect(() => {
     axios
@@ -20,31 +23,24 @@ const App: React.FunctionComponent<Props> = props => {
       .catch(err => console.log(err));
   }, []);
 
+  const filterItems = (item: any, index: number, array: Array<Object>) => {
+    if (searchText !== "") {
+      return item.mission_name === searchText
+    } else {
+      return apiData
+    }
+  };
+
+  let test = apiData.filter(filterItems);
+  console.log(test);
+
   return (
     <div className="App">
       <Layout>
-        <Header>
-          <h2 style={{color: '#FFF'}}>SpaceX Explorer</h2>
-        </Header>
-        <Content style={{ padding: "0 50px", margin: '16px 0' }}>
-          <List
-            className="site-layout-content"
-            grid={{
-              gutter: 16,
-              xs: 1,
-              sm: 2,
-              md: 3,
-              lg: 4,
-              xl: 4,
-              xxl: 6
-            }}
-            dataSource={apiData}
-            renderItem={item => (
-              <List.Item>
-                <MissionCard launch={item} />
-              </List.Item>
-            )}
-          />
+        <NavBar setSearchText={setSearchText} />
+        <Content className="app-content">
+          <h1>{searchText}</h1>
+          <MissionList apiData={test} />
         </Content>
       </Layout>
     </div>
